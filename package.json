@@ -2,15 +2,12 @@
   "name": "release-notes",
   "version": "1.0.0",
   "description": "",
-  "main": "src/index.js",
   "scripts": {
     "test": "jest",
-    "start-local": "cross-env NODE_ENV=localhost babel-node -- src/index.js",
-    "babel-node": "babel-node --presets=env",
+    "generate": "babel-node --presets=env src/generate.js",
     "precommit": "lint-staged"
   },
   "jest": {
-    "testURL": "http://localhost:8080",
     "testEnvironment": "node"
   },
   "lint-staged": {
