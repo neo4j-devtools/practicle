@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "test": "jest",
-    "generate": "babel-node --presets=env src/generate.js",
+    "generate": "babel-node --presets=env src/generate.js --repo=https://github.com/neo4j/neo4j-browser.git --last-commit=4efa747b970e865ad263884fe50eca9283b2e30a --next-version=3.4.6",
     "precommit": "lint-staged"
   },
   "jest": {
