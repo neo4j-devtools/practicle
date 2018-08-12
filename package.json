@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "test": "jest",
-    "generate": "babel-node --presets=env src/generate.js --repo=https://github.com/neo4j/neo4j-browser.git --last-commit=4efa747b970e865ad263884fe50eca9283b2e30a --next-version=3.4.6",
+    "generate": "babel-node --presets=env src/generate.js --repo=https://github.com/neo4j/neo4j-browser.git --last-commit=d7bb58f6ce9696a2ea71a55748820085523e5646 --next-version=3.2.6",
     "precommit": "lint-staged"
   },
   "jest": {
@@ -27,5 +27,8 @@
     "lint-staged": "^7.2.0",
     "prettier": "^1.14.0",
     "yarn": "^1.9.4"
+  },
+  "dependencies": {
+    "@octokit/rest": "^15.9.5"
   }
 }
