@@ -3,6 +3,7 @@ npm-debug.log
 coverage/
 .DS_Store
 .vscode
+.env
 /yarn-error.log
 .idea/
 /bundle-report.html
