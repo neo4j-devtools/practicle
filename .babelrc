@@ -1,3 +1,4 @@
 {
-  "presets": ["env", "jest"]
+  "presets": ["env", "jest"],
+  "plugins": ["transform-runtime"]
 }

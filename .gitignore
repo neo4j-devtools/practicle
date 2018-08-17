@@ -8,4 +8,5 @@ coverage/
 .idea/
 /bundle-report.html
 dist/
+lib/
 package-lock.json
