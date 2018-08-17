@@ -1,77 +1,8 @@
-import yargs from "yargs";
 import Octokit from "@octokit/rest";
 import semverSort from "semver-sort";
-
-/* functions */
-const extractChangeLog = obj => {
-  const label = obj.labels.filter(l => {
-    return l.name === "changelog";
-  });
-
-  return label.length > 0 ? obj.title : null;
-};
-
-const extractFromGithubUrl = url => {
-  const tokens = url.split("/");
-  const repo = tokens.pop().replace(/.git$/, "");
-  const owner = tokens.pop();
-  return {
-    repo,
-    owner
-  };
-};
-
-const getPrMessagesBetweenSha = (prs, from, to) => {
-  const indexFrom = prs.findIndex(_ => _.sha === from);
-  const indexTo = prs.findIndex(_ => _.sha === to);
-  const arr = prs
-    .splice(indexFrom <= 0 ? 0 : indexFrom, indexTo)
-    .filter(_ => _.pr);
-};
-
-const buildOutput = (logs, header, outputPrLinks) => {
-  let out = `
-  # Neo4j Browser - ${header}
-  `;
-
-  logs.forEach(_ => {
-    out += `
-    * ${_.message}`;
-  });
-  console.log(out);
-};
-
-const commandLineSetUp = () =>
-  yargs
-    .env("GITHUB")
-    .option("token", {
-      describe: "GITHUB_TOKEN env should be set",
-      demandOption: true
-    })
-    .options({
-      repo: {
-        alias: "r",
-        describe: "Github repo to pull changes from",
-        demandOption: true
-      },
-      nextVersion: {
-        alias: "nv",
-        describe: "The next version of the software to be release",
-        demandOption: true
-      },
-      lastCommit: {
-        alias: "lc",
-        describe: "The last commit hash to be considered for the changelog",
-        demandOption: true
-      },
-      outputPrLinks: {
-        alias: "opl",
-        describe:
-          "Adds the corresponding Github link at the end of the change message"
-      }
-    })
-    .help()
-    .alias("h", "help").argv;
+import { extractChangeLog, buildOutput } from "./helpers/changelog";
+import { extractFromGithubUrl } from "./helpers/github";
+import { commandLineSetUp } from "./helpers/cli";
 
 async function fetchAllReleases() {
   const perPage = 30;
