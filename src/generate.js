@@ -109,7 +109,7 @@ async function main(lastCommit) {
       })
       .filter(_ => _);
     if (commitsToPrs.length !== 0) {
-      buildOutput(commitsToPrs, value, outputPrLinks);
+      buildOutput(commitsToPrs, value, repoInfo, outputPrLinks);
     }
   }
 }

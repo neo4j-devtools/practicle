@@ -6,14 +6,18 @@ export const extractChangeLog = obj => {
   return label.length > 0 ? obj.title : null;
 };
 
-export const buildOutput = (logs, header, outputPrLinks) => {
-  let out = `
-    # Neo4j Browser - ${header}
+export const buildOutput = (logs, header, repoInfo, outputPrLinks) => {
+  let out = `\n## Neo4j Browser - ${header}
     `;
 
   logs.forEach(_ => {
-    out += `
-      * ${_.message}`;
+    debugger;
+    out += outputPrLinks
+      ? `\n- ${_.message} [\#${_.number}](https://github.com/${
+          repoInfo.owner
+        }/${repoInfo.repo}/pull/${_.number})
+      `
+      : `\n- ${_.message}`;
   });
   console.log(out);
 };
