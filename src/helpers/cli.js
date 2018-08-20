@@ -27,6 +27,11 @@ export const commandLineSetUp = () =>
         alias: "opl",
         describe:
           "Adds the corresponding Github link at the end of the change message"
+      },
+      prevVersion: {
+        alias: "pv",
+        describe:
+          "The prev version tag you wish to begin the log generation from"
       }
     })
     .help()

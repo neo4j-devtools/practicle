@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "test": "jest",
-    "generate": "babel-node --presets=env src/generate.js --repo=https://github.com/neo4j/neo4j-browser.git --last-commit=d7bb58f6ce9696a2ea71a55748820085523e5646 --next-version=3.2.5",
+    "generate": "babel-node --presets=env src/generate.js --pv=3.0.0 --repo=https://github.com/neo4j/neo4j-browser.git --last-commit=d7bb58f6ce9696a2ea71a55748820085523e5646 --next-version=3.2.5",
     "precommit": "lint-staged",
     "build": "babel src -d lib"
   },
@@ -33,6 +33,7 @@
   "dependencies": {
     "@octokit/rest": "^15.9.5",
     "babel-runtime": "^6.26.0",
+    "semver-compare": "^1.0.0",
     "semver-sort": "^0.0.4"
   }
 }
