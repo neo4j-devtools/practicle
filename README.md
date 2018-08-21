@@ -1,7 +1,7 @@
 # Example usage
 
 ``` // Generate md formatted changelog // Output to standard output node
-./generate.js
+node ./generate.js
   --repo=https://github.com/neo4j-private/neo4j-browser
   --next-version=3.2.5
   --last-commit=defedaedfeadefd232323
