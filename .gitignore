@@ -10,3 +10,4 @@ coverage/
 dist/
 lib/
 package-lock.json
+*.tgz

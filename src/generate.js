@@ -1,3 +1,4 @@
+#!/usr/bin/env ./node_modules/.bin/babel-node
 import Octokit from "@octokit/rest";
 import semverSort from "semver-sort";
 import semverCompare from "semver-compare";

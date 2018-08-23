@@ -1,4 +1,13 @@
 {
   "presets": ["env", "jest"],
-  "plugins": ["transform-runtime"]
+  "plugins": [
+    "transform-runtime",
+    [
+      "shebang",
+      {
+        "replacement": "#!/usr/bin/env node",
+        "force": false
+      }
+    ]
+  ]
 }
