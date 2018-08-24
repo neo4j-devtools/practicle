@@ -1,9 +1,9 @@
 {
-  "name": "@neo4j/gh-changelog",
+  "name": "@neo4j/practicle",
   "version": "1.0.0",
-  "description": "Generate a changelog from PR:s in a Github repo",
+  "description": "the pr-activated-changelog-emitter - Generate a changelog from PR:s in a Github repo",
   "bin": {
-    "gh-changelog": "lib/generate.js"
+    "practicle": "lib/generate.js"
   },
   "scripts": {
     "generate": "babel-node src/generate.js",

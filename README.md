@@ -1,4 +1,4 @@
-# gh-changelog
+# Practicle - the pr-activated-changelog-emitter
 
 Generate a markdown formatted changelog from pull requests in a Github repository.
 The pull requests need to have a `changelog` label attached to them.
@@ -17,7 +17,7 @@ When `--prev-version` is included, the same thing happens but it starts from the
 Install globally to get a binary executable in your system.
 
 ```
-npm install -g @neo4j/gh-changelog
+npm install -g @neo4j/practicle
 ```
 
 ## Examples
@@ -25,7 +25,7 @@ npm install -g @neo4j/gh-changelog
 ```bash
 # Generate md formatted changelog for 3.2.0 -> 3.2.5
 # Output to standard output
-gh-changelog \
+practicle \
   --repo=https://github.com/neo4j-private/neo4j-browser \
   --next-version=3.2.5 \
   --last-commit=195694b5479ccc22d144d4ad5f81d74a1ceedb0e \
@@ -35,7 +35,7 @@ gh-changelog \
 
 ```bash
 # Generate and pipe to release_notes.md (just changes since the last release)
-gh-changelog \
+practicle \
   --repo=https://github.com/neo4j-private/neo4j-browser \
   --next-version=3.2.5 \
   --prev-version=3.2.4 \
