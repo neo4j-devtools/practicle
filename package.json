@@ -8,8 +8,11 @@
   "scripts": {
     "generate": "babel-node src/generate.js",
     "precommit": "lint-staged",
-    "build": "babel src -d lib"
+    "build": "babel src -d lib",
+    "test": "jest",
+    "dev": "jest --watchAll"
   },
+  "testEnvironment": "node",
   "lint-staged": {
     "*.{js,jsx,json,css}": [
       "prettier --write",
@@ -28,6 +31,7 @@
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.7.0",
     "husky": "^0.14.3",
+    "jest": "^23.5.0",
     "lint-staged": "^7.2.0",
     "prettier": "^1.14.0",
     "yarn": "^1.9.4"
