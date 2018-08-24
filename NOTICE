@@ -1,0 +1,75 @@
+yarn licenses v1.7.0
+├─ Apache-2.0
+│  └─ before-after-hook@1.1.0
+│     ├─ URL: https://github.com/gr2m/before-after-hook.git
+│     ├─ VendorName: Gregor Martynus
+│     └─ VendorUrl: https://github.com/gr2m/before-after-hook#readme
+├─ BSD
+│  └─ url-template@2.0.8
+│     ├─ URL: git://github.com/bramstein/url-template.git
+│     ├─ VendorName: Bram Stein
+│     └─ VendorUrl: http://www.bramstein.com
+├─ ISC
+│  └─ semver@5.5.0
+│     └─ URL: https://github.com/npm/node-semver
+└─ MIT
+   ├─ @octokit/rest@15.9.5
+   │  ├─ URL: https://github.com/octokit/rest.js
+   │  ├─ VendorName: Gregor Martynus
+   │  └─ VendorUrl: https://github.com/gr2m
+   ├─ agent-base@4.2.1
+   │  ├─ URL: git://github.com/TooTallNate/node-agent-base.git
+   │  ├─ VendorName: Nathan Rajlich
+   │  └─ VendorUrl: http://n8.io/
+   ├─ babel-runtime@6.26.0
+   │  ├─ URL: https://github.com/babel/babel/tree/master/packages/babel-runtime
+   │  └─ VendorName: Sebastian McKenzie
+   ├─ btoa-lite@1.0.0
+   │  ├─ URL: git://github.com/hughsk/btoa-lite.git
+   │  ├─ VendorName: Hugh Kennedy
+   │  └─ VendorUrl: https://github.com/hughsk/btoa-lite
+   ├─ core-js@2.5.7
+   │  └─ URL: https://github.com/zloirock/core-js.git
+   ├─ debug@3.1.0
+   │  ├─ URL: git://github.com/visionmedia/debug.git
+   │  └─ VendorName: TJ Holowaychuk
+   ├─ es6-promise@4.2.4
+   │  ├─ URL: git://github.com/stefanpenner/es6-promise.git
+   │  ├─ VendorName: Yehuda Katz, Tom Dale, Stefan Penner and contributors
+   │  └─ VendorUrl: Conversion to ES6 API by Jake Archibald
+   ├─ es6-promisify@5.0.0
+   │  ├─ URL: https://github.com/digitaldesignlabs/es6-promisify.git
+   │  └─ VendorName: Mike Hall
+   ├─ http-proxy-agent@2.1.0
+   │  ├─ URL: git://github.com/TooTallNate/node-http-proxy-agent.git
+   │  ├─ VendorName: Nathan Rajlich
+   │  └─ VendorUrl: http://n8.io/
+   ├─ https-proxy-agent@2.2.1
+   │  ├─ URL: git://github.com/TooTallNate/node-https-proxy-agent.git
+   │  ├─ VendorName: Nathan Rajlich
+   │  └─ VendorUrl: http://n8.io/
+   ├─ lodash@4.17.10
+   │  ├─ URL: https://github.com/lodash/lodash.git
+   │  ├─ VendorName: John-David Dalton
+   │  └─ VendorUrl: https://lodash.com/
+   ├─ ms@2.0.0
+   │  └─ URL: https://github.com/zeit/ms.git
+   ├─ node-fetch@2.2.0
+   │  ├─ URL: https://github.com/bitinn/node-fetch.git
+   │  ├─ VendorName: David Frank
+   │  └─ VendorUrl: https://github.com/bitinn/node-fetch
+   ├─ regenerator-runtime@0.11.1
+   │  ├─ URL: https://github.com/facebook/regenerator/tree/master/packages/regenerator-runtime
+   │  └─ VendorName: Ben Newman
+   ├─ semver-compare@1.0.0
+   │  ├─ URL: git://github.com/substack/semver-compare.git
+   │  ├─ VendorName: James Halliday
+   │  └─ VendorUrl: https://github.com/substack/semver-compare
+   ├─ semver-regex@1.0.0
+   │  ├─ URL: https://github.com/sindresorhus/semver-regex.git
+   │  ├─ VendorName: Sindre Sorhus
+   │  └─ VendorUrl: http://sindresorhus.com
+   └─ semver-sort@0.0.4
+      ├─ URL: https://github.com/ragingwind/semver-sort.git
+      ├─ VendorName: ragingwind
+      └─ VendorUrl: ragingwind.me
