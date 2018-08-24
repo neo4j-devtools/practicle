@@ -15,8 +15,7 @@ export const buildOutput = (logs, header, repoInfo, outputPrLinks) => {
     out += outputPrLinks
       ? `\n- ${_.message} [\#${_.number}](https://github.com/${
           repoInfo.owner
-        }/${repoInfo.repo}/pull/${_.number})
-      `
+        }/${repoInfo.repo}/pull/${_.number})`
       : `\n- ${_.message}`;
   });
   console.log(out);
