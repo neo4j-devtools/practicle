@@ -8,6 +8,8 @@ the semver minor version and generates a complete changelog for all versions in 
 
 I.e. if `--next-version=3.2.5` is used, the output will incclude all changes from `3.2.0` to the upoming `3.2.5` release. They are grouped by version.
 
+Versions are taken from git tags that has the format `x.y.z`.
+
 When `--prev-version` is included, the same thing happens but it starts from the version of `--prev-version` rather than `.0`.
 
 # Usage
