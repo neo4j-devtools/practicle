@@ -20,7 +20,7 @@
     "node": ">=8"
   },
   "author": "Neo4j Inc.",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-jest": "^23.4.2",
