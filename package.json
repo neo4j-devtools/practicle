@@ -6,11 +6,10 @@
     "practicle": "lib/generate.js"
   },
   "scripts": {
-    "generate": "babel-node src/generate.js",
-    "precommit": "lint-staged",
     "build": "babel src -d lib --ignore '**/*.test.js'",
+    "dev": "jest src --watchAll",
     "test": "jest src",
-    "dev": "jest src --watchAll"
+    "precommit": "lint-staged"
   },
   "testEnvironment": "node",
   "lint-staged": {
