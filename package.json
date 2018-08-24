@@ -8,7 +8,7 @@
   "scripts": {
     "generate": "babel-node src/generate.js",
     "precommit": "lint-staged",
-    "build": "babel src -d lib",
+    "build": "babel src -d lib --ignore '**/*.test.js'",
     "test": "jest src",
     "dev": "jest src --watchAll"
   },
