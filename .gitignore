@@ -11,4 +11,3 @@ dist/
 lib/
 package-lock.json
 *.tgz
-.npmrc
