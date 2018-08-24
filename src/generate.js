@@ -1,10 +1,10 @@
 #!/usr/bin/env ./node_modules/.bin/babel-node
 import Octokit from "@octokit/rest";
 import semverSort from "semver-sort";
-import semverCompare from "semver-compare";
 import { extractChangeLog, buildOutput } from "./helpers/changelog";
 import { extractFromGithubUrl } from "./helpers/github";
 import { commandLineSetUp } from "./helpers/cli";
+import { versionFilter } from "./helpers/utils.js";
 
 async function fetchAllReleases() {
   const perPage = 30;
@@ -83,18 +83,9 @@ async function getAllPullRequests() {
 async function main(lastCommit) {
   const prs = await getAllPullRequests();
   const releases = await fetchAllReleases();
-  const tokenizedNextVersion = nextVersion.split(".");
   const releaseTags = releases
     .map(release => release.name)
-    .filter(
-      name =>
-        prevVersion
-          ? semverCompare(name, prevVersion) >= 0
-          : name.startsWith(
-              prevVersion ||
-                [tokenizedNextVersion[0], tokenizedNextVersion[1]].join(".")
-            )
-    );
+    .filter(name => versionFilter(name, prevVersion, nextVersion));
   releaseTags.push(nextVersion);
   const sortedList = semverSort.desc(releaseTags);
   for (const [index, value] of sortedList.entries()) {
