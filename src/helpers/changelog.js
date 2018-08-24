@@ -7,7 +7,7 @@ export const extractChangeLog = obj => {
 };
 
 export const buildOutput = (logs, header, repoInfo, outputPrLinks) => {
-  let out = `\n## Neo4j Browser - ${header}
+  let out = `\n## ${header}
     `;
 
   logs.forEach(_ => {
