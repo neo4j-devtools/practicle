@@ -26,7 +26,13 @@ test("versionFilter filters correctly", () => {
       nextVersion: "2.1.5",
       expect: true
     },
-    { tagName: "2.1.0", prevVersion: null, nextVersion: "2.1.5", expect: true }
+    { tagName: "2.1.0", prevVersion: null, nextVersion: "2.1.5", expect: true },
+    {
+      tagName: "2.1.0",
+      prevVersion: "2.1.1",
+      nextVersion: "2.1.5",
+      expect: false
+    }
   ];
 
   tests.forEach(test =>
