@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="https://i.imgur.com/ygQiFlN.png" width="340" alt="practicle logo">
+</p>
+
 # Practicle - the pr-activated-changelog-emitter
 
 Generate a markdown formatted changelog from pull requests in a Github repository.
