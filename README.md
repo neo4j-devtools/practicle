@@ -2,7 +2,7 @@
   <img src="https://i.imgur.com/KvrVHgB.png" width="340" alt="practicle logo">
 </p>
 
-# Practicle - the pr-activated-changelog-emitter
+# PRacticle - the pr-activated-changelog-emitter
 
 Generate a markdown formatted changelog from pull requests in a Github repository.
 The pull requests need to have a `changelog` label attached to them.
