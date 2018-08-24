@@ -2,7 +2,7 @@ import yargs from "yargs";
 
 export const commandLineSetUp = () =>
   yargs
-    .env("GITHUB")
+    .env("GITHUB_TOKEN")
     .option("token", {
       describe: "GITHUB_TOKEN env should be set",
       demandOption: true

@@ -10,27 +10,61 @@ I.e. if `--next-version=3.2.5` is used, the output will incclude all changes fro
 
 When `--prev-version` is included, the same thing happens but it starts from the version of `--prev-version` rather than `.0`.
 
-# Example usage
+# Usage
+
+Install globally to get a binary executable in your system.
 
 ```
-// Generate md formatted changelog for 3.2.0 -> 3.2.5
-// Output to standard output
-node ./generate.js
-  --repo=https://github.com/neo4j-private/neo4j-browser
-  --next-version=3.2.5
-  --last-commit=195694b5479ccc22d144d4ad5f81d74a1ceedb0e
-  --output-pr-links (default off)
-  --token=gh-token
+npm install -g @neo4j/gh-changelog
 ```
 
+## Examples
+
+```bash
+# Generate md formatted changelog for 3.2.0 -> 3.2.5
+# Output to standard output
+gh-changelog \
+  --repo=https://github.com/neo4j-private/neo4j-browser \
+  --next-version=3.2.5 \
+  --last-commit=195694b5479ccc22d144d4ad5f81d74a1ceedb0e \
+  --output-pr-links \
+  --token=xxx
 ```
-// Generate for release_notes.md (just changes since the last release)
-node ./generate.js
-  --repo=https://github.com/neo4j-private/neo4j-browser
-  --next-version=3.2.5
-  --prev-version=3.2.4
-  --last-commit=195694b5479ccc22d144d4ad5f81d74a1ceedb0e
-  --output-pr-links (default off)
-  --token=gh-token
+
+```bash
+# Generate and pipe to release_notes.md (just changes since the last release)
+gh-changelog \
+  --repo=https://github.com/neo4j-private/neo4j-browser \
+  --next-version=3.2.5 \
+  --prev-version=3.2.4 \
+  --last-commit=195694b5479ccc22d144d4ad5f81d74a1ceedb0e \
+  --output-pr-links \
+  --token=xxx \
 > release_notes.md
 ```
+
+# CLI options
+
+### `--repo` (required)
+
+The url to the Github repo you want to pull from.
+
+### `--next-version` (required)
+
+The version to be released. Just to get a header on the output.
+
+### `--last-commit` (required)
+
+This tool generates changelog up until this commit.
+
+### `--prev-version` (optional)
+
+If you don't want to start generating from `.0` version, use this.
+
+### `--output-pr-links` (optional, default false)
+
+If you want to append you changelog entries with links to the PR.
+
+### `--token` (optional)
+
+To be able to reach private repos provide a Github access token here, or set a environment variable named `GITHUB_TOKEN`.
