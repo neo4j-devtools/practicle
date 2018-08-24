@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://i.imgur.com/ygQiFlN.png" width="340" alt="practicle logo">
+  <img src="https://i.imgur.com/KvrVHgB.png" width="340" alt="practicle logo">
 </p>
 
 # Practicle - the pr-activated-changelog-emitter
