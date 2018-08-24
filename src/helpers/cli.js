@@ -2,7 +2,7 @@ import yargs from "yargs";
 
 export const commandLineSetUp = () =>
   yargs
-    .env("GITHUB_TOKEN")
+    .env("GITHUB")
     .option("token", {
       describe: "GITHUB_TOKEN env should be set",
       demandOption: true
@@ -13,22 +13,22 @@ export const commandLineSetUp = () =>
         describe: "Github repo to pull changes from",
         demandOption: true
       },
-      nextVersion: {
+      "next-version": {
         alias: "nv",
         describe: "The next version of the software to be release",
         demandOption: true
       },
-      lastCommit: {
+      "last-commit": {
         alias: "lc",
         describe: "The last commit hash to be considered for the changelog",
         demandOption: true
       },
-      outputPrLinks: {
+      "output-pr-links": {
         alias: "opl",
         describe:
           "Adds the corresponding Github link at the end of the change message"
       },
-      prevVersion: {
+      "prev-version": {
         alias: "pv",
         describe:
           "The prev version tag you wish to begin the log generation from"
