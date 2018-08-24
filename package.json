@@ -9,8 +9,8 @@
     "generate": "babel-node src/generate.js",
     "precommit": "lint-staged",
     "build": "babel src -d lib",
-    "test": "jest",
-    "dev": "jest --watchAll"
+    "test": "jest src",
+    "dev": "jest src --watchAll"
   },
   "testEnvironment": "node",
   "lint-staged": {
