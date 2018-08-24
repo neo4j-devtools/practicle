@@ -1,13 +1,13 @@
 {
-  "name": "release-notes",
+  "name": "@neo4j/gh-changelog",
   "version": "1.0.0",
-  "description": "",
+  "description": "Generate a changelog from PR:s in a Github repo",
   "bin": {
-    "release-notes": "lib/generate.js"
+    "gh-changelog": "lib/generate.js"
   },
   "scripts": {
     "test": "jest",
-    "generate": "babel-node --presets=env src/generate.js --pv=3.0.0 --repo=https://github.com/neo4j/neo4j-browser.git --last-commit=d7bb58f6ce9696a2ea71a55748820085523e5646 --next-version=3.2.5",
+    "generate": "babel-node src/generate.js",
     "precommit": "lint-staged",
     "build": "babel src -d lib"
   },
