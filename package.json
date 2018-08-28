@@ -7,6 +7,11 @@
     "url": "https://github.com/neo4j-apps/practicle.git"
   },
   "homepage": "https://github.com/neo4j-apps/practicle",
+  "keywords": [
+    "pull request",
+    "changelog",
+    "release notes"
+  ],
   "bin": {
     "practicle": "lib/generate.js"
   },
