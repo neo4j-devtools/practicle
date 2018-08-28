@@ -2,6 +2,11 @@
   "name": "@neo4j/practicle",
   "version": "0.1.2",
   "description": "the pr-activated-changelog-emitter - Generate a changelog from PR:s in a Github repo",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/neo4j-apps/practicle.git"
+  },
+  "homepage": "https://github.com/neo4j-apps/practicle",
   "bin": {
     "practicle": "lib/generate.js"
   },
