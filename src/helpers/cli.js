@@ -1,7 +1,13 @@
 import yargs from "yargs";
 
-export const commandLineSetUp = () =>
+export const setUpCli = () =>
   yargs
+    .command("generate", "Generate release notes", commandLineSetUp)
+    .command("draft", "Create draft release on Github", commandLineSetUpPublish)
+    .demandCommand().argv;
+
+const commandLineSetUp = y =>
+  y
     .env("GITHUB")
     .option("token", {
       describe: "GITHUB_TOKEN env should be set",
@@ -35,10 +41,10 @@ export const commandLineSetUp = () =>
       }
     })
     .help()
-    .alias("h", "help").argv;
+    .alias("h", "help");
 
-export const commandLineSetUpPublish = () =>
-  yargs
+const commandLineSetUpPublish = y =>
+  y
     .env("GITHUB_TOKEN")
     .option("token", {
       describe: "GITHUB_TOKEN env should be set",
@@ -67,4 +73,4 @@ export const commandLineSetUpPublish = () =>
       }
     })
     .help()
-    .alias("h", "help").argv;
+    .alias("h", "help");
