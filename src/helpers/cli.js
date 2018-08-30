@@ -2,7 +2,7 @@ import yargs from "yargs";
 
 export const setUpCli = () =>
   yargs
-    .command("generate", "Generate release notes", commandLineSetUp)
+    .command(["generate", "$0"], "Generate release notes", commandLineSetUp)
     .command("draft", "Create draft release on Github", commandLineSetUpPublish)
     .demandCommand().argv;
 
