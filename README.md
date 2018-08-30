@@ -10,7 +10,7 @@ The pull requests need to have a `changelog` label attached to them.
 If the option `--prev-version` is omitted the tool looks for all PR:s in
 the semver minor version and generates a complete changelog for all versions in that range.
 
-I.e. if `--next-version=3.2.5` is used, the output will incclude all changes from `3.2.0` to the upoming `3.2.5` release. They are grouped by version.
+I.e. if `--next-version=3.2.5` is used, the output will include all changes from `3.2.0` to the upoming `3.2.5` release. They are grouped by version.
 
 Versions are taken from git tags that has the format `x.y.z`.
 
@@ -51,7 +51,7 @@ practicle \
 
 ### Output
 
-The following command (try it, just remeber to use your [own token](https://github.com/settings/tokens)):
+The following command (try it, just remember to use your [own token](https://github.com/settings/tokens)):
 
 ```
 practicle \
