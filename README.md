@@ -30,7 +30,7 @@ npm install -g @neo4j/practicle
 # Generate md formatted changelog for 3.2.0 -> 3.2.5
 # Output to standard output
 practicle \
-  --repo=https://github.com/neo4j-private/neo4j-browser \
+  --repo=https://github.com/neo4j/neo4j-browser \
   --next-version=3.2.5 \
   --last-commit=195694b5479ccc22d144d4ad5f81d74a1ceedb0e \
   --output-pr-links \
@@ -40,13 +40,54 @@ practicle \
 ```bash
 # Generate and pipe to release_notes.md (just changes since the last release)
 practicle \
-  --repo=https://github.com/neo4j-private/neo4j-browser \
+  --repo=https://github.com/neo4j/neo4j-browser \
   --next-version=3.2.5 \
   --prev-version=3.2.4 \
   --last-commit=195694b5479ccc22d144d4ad5f81d74a1ceedb0e \
   --output-pr-links \
   --token=xxx \
 > release_notes.md
+```
+
+### Output
+
+The following command (try it, just remeber to use your [own token](https://github.com/settings/tokens)):
+
+```
+practicle \
+  --repo=https://github.com/neo4j/neo4j-browser \
+  --next-version=3.2.6 \
+  --last-commit=7ee472bedcc2e73023e9cf09708e597913ff70cd \
+  --output-pr-links \
+  --token=xxx
+```
+
+produces the following output
+
+```
+## 3.2.6
+
+- Add `:history clear` command [#800](https://github.com/neo4j/neo4j-browser/pull/800)
+- Add pagecache hits and misses to plan output [#812](https://github.com/neo4j/neo4j-browser/pull/812)
+- Add complete support for bolt+routing:// [#814](https://github.com/neo4j/neo4j-browser/pull/814)
+- Enable users with non reader roles to connect [#818](https://github.com/neo4j/neo4j-browser/pull/818)
+
+## 3.2.5
+
+- Add toggle for multi statement cypher editor [#793](https://github.com/neo4j/neo4j-browser/pull/793)
+
+## 3.2.3
+
+- Fix editor to handle string literals that contain new lines [#794](https://github.com/neo4j/neo4j-browser/pull/794)
+
+## 3.2.2
+
+- Add support for multi-statement execution [#722](https://github.com/neo4j/neo4j-browser/pull/722)
+
+## 3.2.1
+
+- Handle changelog url building in disconnected state [#787](https://github.com/neo4j/neo4j-browser/pull/787)
+- Fix issue with creating unique keys from user input [#790](https://github.com/neo4j/neo4j-browser/pull/790)
 ```
 
 # CLI options
