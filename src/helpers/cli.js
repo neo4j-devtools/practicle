@@ -1,7 +1,13 @@
 import yargs from "yargs";
 
-export const commandLineSetUp = () =>
+export const setUpCli = () =>
   yargs
+    .command(["generate", "$0"], "Generate release notes", commandLineSetUp)
+    .command("draft", "Create draft release on Github", commandLineSetUpPublish)
+    .demandCommand().argv;
+
+const commandLineSetUp = y =>
+  y
     .env("GITHUB")
     .option("token", {
       describe: "GITHUB_TOKEN env should be set",
@@ -35,4 +41,36 @@ export const commandLineSetUp = () =>
       }
     })
     .help()
-    .alias("h", "help").argv;
+    .alias("h", "help");
+
+const commandLineSetUpPublish = y =>
+  y
+    .env("GITHUB_TOKEN")
+    .option("token", {
+      describe: "GITHUB_TOKEN env should be set",
+      demandOption: true
+    })
+    .options({
+      repo: {
+        alias: "r",
+        describe: "Github repo to push draft release to",
+        demandOption: true
+      },
+      "next-version": {
+        alias: "nv",
+        describe: "The next version of the software to be release",
+        demandOption: true
+      },
+      commit: {
+        alias: "c",
+        describe: "The commit that will be tagged",
+        demandOption: true
+      },
+      file: {
+        describe:
+          "File from which to read that will be used for the release description",
+        demandOption: true
+      }
+    })
+    .help()
+    .alias("h", "help");
