@@ -1,27 +1,27 @@
 import yargs from "yargs";
-import { init as generate } from "./../generate";
-import { init as draft } from "./../draft";
-import { init as fetch } from "./../fetch";
+import { init as generateChangelog } from "./../generateChangelog";
+import { init as draftReleaseToGithub } from "../draftReleaseToGithub";
+import { init as relaseNotesFromGithub } from "../relaseNotesFromGithub";
 
 export const setUpCli = () =>
   yargs
     .command(
-      ["generate", "$0"],
+      ["generate-changelog", "$0"],
       "Generate release notes",
       commandLineSetUp,
-      _ => generate(_)
+      generateChangelog
     )
     .command(
-      "draft",
+      "draft-release",
       "Create draft release on Github",
       commandLineSetUpPublish,
-      _ => draft(_)
+      draftReleaseToGithub
     )
     .command(
-      "fetch",
-      "Fetch release notes from Github",
+      "get-release-notes",
+      "Get release notes from Github",
       commandLineSetUpFetch,
-      _ => fetch(_)
+      relaseNotesFromGithub
     )
     .demandCommand().argv;
 
