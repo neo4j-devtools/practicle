@@ -6,7 +6,7 @@ import { init as relaseNotesFromGithub } from "../relaseNotesFromGithub";
 export const setUpCli = () =>
   yargs
     .command(
-      ["generate-changelog", "$0"],
+      "generate-changelog",
       "Generate release notes",
       commandLineSetUp,
       generateChangelog
