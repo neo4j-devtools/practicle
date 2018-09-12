@@ -3,7 +3,7 @@ import Octokit from "@octokit/rest";
 import semverSort from "semver-sort";
 import { extractChangeLog, buildOutput } from "./helpers/changelog";
 import { extractFromGithubUrl } from "./helpers/github";
-import { versionFilter } from "./helpers/utils.js";
+import { versionFilter } from "./helpers/utils";
 
 const octokit = new Octokit();
 
