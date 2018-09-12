@@ -3,10 +3,12 @@ import * as fs from "fs";
 
 import Octokit from "@octokit/rest";
 import { extractFromGithubUrl } from "./helpers/github";
-import { commandLineSetUpPublish } from "./helpers/cli";
 
-async function publishDraftRelease() {
+const octokit = new Octokit();
+
+async function publishDraftRelease(args, content, repoInfo) {
   const { owner, repo } = repoInfo;
+  const { nextVersion, commit } = args;
 
   console.log(
     `Creating draft release ${nextVersion} (${commit}) to ${owner}/${repo}`
@@ -30,21 +32,16 @@ async function publishDraftRelease() {
   return result;
 }
 
-async function main() {
-  await publishDraftRelease();
+async function main(args, content) {
+  await publishDraftRelease(args, content, extractFromGithubUrl(args.repo));
 }
 
 /* main*/
+export const init = args => {
+  octokit.authenticate({
+    type: "token",
+    token: args.token
+  });
 
-const { repo, nextVersion, commit, file, token } = commandLineSetUpPublish();
-
-const repoInfo = extractFromGithubUrl(repo);
-const octokit = new Octokit();
-const content = fs.readFileSync(file, "utf8");
-
-octokit.authenticate({
-  type: "token",
-  token
-});
-
-main();
+  main(args, fs.readFileSync(args.file, "utf8"));
+};
