@@ -18,8 +18,8 @@ export const setUpCli = () =>
       draftReleaseToGithub
     )
     .command(
-      "get-release-notes",
-      "Get release notes from Github",
+      "fetch-release-notes",
+      "Fetch release notes from Github",
       commandLineSetUpFetch,
       relaseNotesFromGithub
     )
