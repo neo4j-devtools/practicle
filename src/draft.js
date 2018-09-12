@@ -10,10 +10,6 @@ async function publishDraftRelease(args, content, repoInfo) {
   const { owner, repo } = repoInfo;
   const { nextVersion, commit } = args;
 
-  console.log(
-    `Creating draft release ${nextVersion} (${commit}) to ${owner}/${repo}`
-  );
-
   const result = await octokit.repos.createRelease({
     owner,
     repo,
@@ -25,7 +21,7 @@ async function publishDraftRelease(args, content, repoInfo) {
     prerelease: false
   });
   if (result.status === 201) {
-    console.log(`Draft release created (${result.data.html_url})`);
+    console.log(result.data.html_url.split("/").reverse()[0]);
   } else {
     console.log("Draft release failed", result.status);
   }
