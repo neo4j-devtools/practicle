@@ -29,7 +29,7 @@ npm install -g @neo4j/practicle
 ```bash
 # Generate md formatted changelog for 3.2.0 -> 3.2.5
 # Output to standard output
-practicle \
+practicle generate-changelog \
   --repo=https://github.com/neo4j/neo4j-browser \
   --next-version=3.2.5 \
   --last-commit=195694b5479ccc22d144d4ad5f81d74a1ceedb0e \
@@ -39,7 +39,7 @@ practicle \
 
 ```bash
 # Generate and pipe to release_notes.md (just changes since the last release)
-practicle \
+practicle generate-changelog \
   --repo=https://github.com/neo4j/neo4j-browser \
   --next-version=3.2.5 \
   --prev-version=3.2.4 \
@@ -54,7 +54,7 @@ practicle \
 The following command (try it, just remember to use your [own token](https://github.com/settings/tokens)):
 
 ```
-practicle \
+practicle generate-changelog \
   --repo=https://github.com/neo4j/neo4j-browser \
   --next-version=3.2.6 \
   --last-commit=7ee472bedcc2e73023e9cf09708e597913ff70cd \
