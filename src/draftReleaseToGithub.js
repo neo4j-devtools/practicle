@@ -9,23 +9,26 @@ const octokit = new Octokit();
 async function publishDraftRelease(args, content, repoInfo) {
   const { owner, repo } = repoInfo;
   const { nextVersion, commit } = args;
-
-  const result = await octokit.repos.createRelease({
-    owner,
-    repo,
-    tag_name: nextVersion,
-    target_commitish: commit,
-    name: nextVersion,
-    body: content,
-    draft: true,
-    prerelease: false
-  });
-  if (result.status === 201) {
-    console.log(result.data.html_url.split("/").reverse()[0]);
-  } else {
-    console.log("Draft release failed", result.status);
+  try {
+    const result = await octokit.repos.createRelease({
+      owner,
+      repo,
+      tag_name: nextVersion,
+      target_commitish: commit,
+      name: nextVersion,
+      body: content,
+      draft: true,
+      prerelease: false
+    });
+    if (result.status === 201) {
+      console.log(result.data.html_url.split("/").reverse()[0]);
+    } else {
+      console.log("Draft release failed", result.status);
+    }
+    return result;
+  } catch (e) {
+    console.error(`Cannot create github release: ${e}`);
   }
-  return result;
 }
 
 async function main(args, content) {
