@@ -16,9 +16,18 @@ async function getRelease(tag, repoInfo) {
 }
 
 async function main(args) {
-  const release = await getRelease(args.tag, extractFromGithubUrl(args.repo));
-  if (release && release.body) {
-    console.log(release.body);
+  try {
+    const release = await getRelease(args.tag, extractFromGithubUrl(args.repo));
+    if (release && release.body) {
+      console.log(release.body);
+    } else {
+      throw new Error("No release body found");
+    }
+  } catch (e) {
+    console.log(
+      "An error occurred. Make sure you specify a Github release tag (a tag that is marked as a release in Github)",
+      e.message
+    );
   }
 }
 
