@@ -3,10 +3,11 @@ import Octokit from "@octokit/rest";
 import semverSort from "semver-sort";
 import { extractChangeLog, buildOutput } from "./helpers/changelog";
 import { extractFromGithubUrl } from "./helpers/github";
-import { commandLineSetUp } from "./helpers/cli";
-import { versionFilter } from "./helpers/utils.js";
+import { versionFilter } from "./helpers/utils";
 
-async function fetchAllReleases() {
+const octokit = new Octokit();
+
+async function fetchAllReleases(repoInfo) {
   const perPage = 30;
 
   async function getReleases(page) {
@@ -30,7 +31,7 @@ async function fetchAllReleases() {
   return results.filter(_ => /^\d/.test(_.name));
 }
 
-async function fetchCommitsBetween(from, to) {
+async function fetchCommitsBetween(from, to, repoInfo) {
   const result = await octokit.repos.compareCommits({
     owner: repoInfo.owner,
     repo: repoInfo.repo,
@@ -41,7 +42,7 @@ async function fetchCommitsBetween(from, to) {
   return result.data.commits;
 }
 
-async function getAllPullRequests() {
+async function getAllPullRequests(repoInfo) {
   const perPage = 100;
 
   async function getPullRequests(page) {
@@ -80,49 +81,44 @@ async function getAllPullRequests() {
     .filter(_ => _);
 }
 
-async function main(lastCommit) {
-  const prs = await getAllPullRequests();
-  const releases = await fetchAllReleases();
+async function main(args) {
+  const repoInfo = extractFromGithubUrl(args.repo);
+
+  const prs = await getAllPullRequests(repoInfo);
+  const releases = await fetchAllReleases(repoInfo);
   const releaseTags = releases
     .map(release => release.name)
-    .filter(name => versionFilter(name, prevVersion, nextVersion));
-  releaseTags.push(nextVersion);
+    .filter(name => versionFilter(name, args.prevVersion, args.nextVersion));
+  releaseTags.push(args.nextVersion);
   const sortedList = semverSort.desc(releaseTags);
   for (const [index, value] of sortedList.entries()) {
     const nextRelease = sortedList[index + 1];
-    const thisRelease = value === nextVersion ? lastCommit : value;
+    const thisRelease = value === args.nextVersion ? args.lastCommit : value;
     if (!value || !nextRelease) {
       break;
     }
-    const commits = await fetchCommitsBetween(nextRelease, thisRelease);
+    const commits = await fetchCommitsBetween(
+      nextRelease,
+      thisRelease,
+      repoInfo
+    );
     const commitsToPrs = commits
       .map(commit => {
         return prs.find(pr => pr.sha === commit.sha);
       })
       .filter(_ => _);
     if (commitsToPrs.length !== 0) {
-      buildOutput(commitsToPrs, value, repoInfo, outputPrLinks);
+      buildOutput(commitsToPrs, value, repoInfo, args.outputPrLinks);
     }
   }
 }
 
 /* main*/
+export const init = args => {
+  octokit.authenticate({
+    type: "token",
+    token: args.token
+  });
 
-const {
-  repo,
-  nextVersion,
-  lastCommit,
-  outputPrLinks = false,
-  prevVersion,
-  token
-} = commandLineSetUp();
-
-const repoInfo = extractFromGithubUrl(repo);
-const octokit = new Octokit();
-
-octokit.authenticate({
-  type: "token",
-  token
-});
-
-main(lastCommit);
+  main(args);
+};

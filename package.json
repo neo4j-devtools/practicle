@@ -13,7 +13,7 @@
     "release notes"
   ],
   "bin": {
-    "practicle": "lib/generate.js"
+    "practicle": "lib/index.js"
   },
   "scripts": {
     "build": "babel src -d lib --ignore '**/*.test.js'",

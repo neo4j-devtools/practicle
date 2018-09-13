@@ -1,9 +1,28 @@
 import yargs from "yargs";
+import { init as generateChangelog } from "./../generateChangelog";
+import { init as draftReleaseToGithub } from "../draftReleaseToGithub";
+import { init as relaseNotesFromGithub } from "../relaseNotesFromGithub";
 
 export const setUpCli = () =>
   yargs
-    .command(["generate", "$0"], "Generate release notes", commandLineSetUp)
-    .command("draft", "Create draft release on Github", commandLineSetUpPublish)
+    .command(
+      "generate-changelog",
+      "Generate release notes",
+      commandLineSetUp,
+      generateChangelog
+    )
+    .command(
+      "draft-release",
+      "Create draft release on Github",
+      commandLineSetUpPublish,
+      draftReleaseToGithub
+    )
+    .command(
+      "fetch-release-notes",
+      "Fetch release notes from Github",
+      commandLineSetUpFetch,
+      relaseNotesFromGithub
+    )
     .demandCommand().argv;
 
 const commandLineSetUp = y =>
@@ -69,6 +88,28 @@ const commandLineSetUpPublish = y =>
       file: {
         describe:
           "File from which to read that will be used for the release description",
+        demandOption: true
+      }
+    })
+    .help()
+    .alias("h", "help");
+
+const commandLineSetUpFetch = y =>
+  y
+    .env("GITHUB_TOKEN")
+    .option("token", {
+      describe: "GITHUB_TOKEN env should be set",
+      demandOption: true
+    })
+    .options({
+      repo: {
+        alias: "r",
+        describe: "Github repo to push draft release to",
+        demandOption: true
+      },
+      tag: {
+        alias: "t",
+        describe: "The tag associated with the release",
         demandOption: true
       }
     })
