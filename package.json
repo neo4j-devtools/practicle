@@ -1,6 +1,6 @@
 {
   "name": "@neo4j/practicle",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "the pr-activated-changelog-emitter - Generate a changelog from PR:s in a Github repo",
   "repository": {
     "type": "git",
