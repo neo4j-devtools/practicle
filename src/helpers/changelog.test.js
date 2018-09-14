@@ -14,7 +14,7 @@ describe("extractChangeLogMessage", () => {
     const actual = extractChangeLogMessage(pr);
     expect(actual).toEqual(title);
   });
-  test("maps `message:` when at the beginning of a line", () => {
+  test("maps `changelog:` when at the beginning of a line", () => {
     const title = "emily";
     const changeLogMessage = "elliot";
 
@@ -26,7 +26,7 @@ describe("extractChangeLogMessage", () => {
     const actual = extractChangeLogMessage(pr);
     expect(actual).toEqual("elliot");
   });
-  test("does not map `message:` when not at the beginning of a line", () => {
+  test("does not map `changelog:` when not at the beginning of a line", () => {
     const title = "emily";
     const changeLogMessage = "elliot";
 
@@ -37,6 +37,18 @@ describe("extractChangeLogMessage", () => {
     };
     const actual = extractChangeLogMessage(pr);
     expect(actual).toEqual(title);
+  });
+  test("does not map more than one line on `changelog:`", () => {
+    const title = "emily";
+    const changeLogMessage = "elliot";
+
+    const pr = {
+      labels: [{ name: "changelog" }],
+      title,
+      body: "foo\nchangelog: " + changeLogMessage + "\nyo!"
+    };
+    const actual = extractChangeLogMessage(pr);
+    expect(actual).toEqual(changeLogMessage);
   });
 });
 
