@@ -1,6 +1,7 @@
 import yargs from "yargs";
 import { init as generateChangelog } from "./../generateChangelog";
 import { init as draftReleaseToGithub } from "../draftReleaseToGithub";
+import { init as releaseToGithub } from "../releaseToGithub";
 import { init as relaseNotesFromGithub } from "../relaseNotesFromGithub";
 
 export const setUpCli = () =>
@@ -16,6 +17,12 @@ export const setUpCli = () =>
       "Create draft release on Github",
       commandLineSetUpPublish,
       draftReleaseToGithub
+    )
+    .command(
+      "release",
+      "Create release on Github",
+      commandLineSetUpPublish,
+      releaseToGithub
     )
     .command(
       "fetch-release-notes",
