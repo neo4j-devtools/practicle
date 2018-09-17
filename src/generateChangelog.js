@@ -1,7 +1,11 @@
 #!/usr/bin/env ./node_modules/.bin/babel-node
 import Octokit from "@octokit/rest";
 import semverSort from "semver-sort";
-import { extractChangeLogMessage, buildOutput } from "./helpers/changelog";
+import {
+  extractChangeLogMessage,
+  buildOutput,
+  extractIssuesFromString
+} from "./helpers/changelog";
 import { extractFromGithubUrl } from "./helpers/github";
 import { versionFilter } from "./helpers/utils";
 
@@ -68,11 +72,13 @@ async function getAllPullRequests(repoInfo) {
   return results
     .map(pr => {
       const changelogMessage = extractChangeLogMessage(pr);
+      const issues = extractIssuesFromString(pr.body);
       const { url, merge_commit_sha, number } = pr;
       if (changelogMessage) {
         return {
           sha: merge_commit_sha,
           message: changelogMessage,
+          issues,
           number,
           url
         };

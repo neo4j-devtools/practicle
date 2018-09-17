@@ -1,4 +1,8 @@
-import { buildOutput, extractChangeLogMessage } from "./changelog";
+import {
+  buildOutput,
+  extractChangeLogMessage,
+  extractIssuesFromString
+} from "./changelog";
 
 jest.spyOn(global.console, "log").mockImplementation(() => {});
 
@@ -52,16 +56,25 @@ describe("extractChangeLogMessage", () => {
   });
 });
 
-describe("changelog output", () => {
-  test("prints out change log", () => {
-    const message = "foobar";
-    const logs = [{ message }];
-    const header = "foobar";
-    buildOutput(logs, header, { owner: "owner", repo: "repo" }, false);
-
-    expect(getLog()).toEqual(expect.stringContaining(header));
-    expect(getLog()).toEqual(expect.stringContaining(message));
+describe("extractIssuesFromMessage", () => {
+  test("no issue", () => {
+    const message = "emily";
+    const actual = extractIssuesFromString(message);
+    expect(actual).toBeFalsy();
   });
+  test("single issue", () => {
+    const message = "elliot's\nissues: emily";
+    const actual = extractIssuesFromString(message);
+    expect(actual).toBe("Issue(s): emily");
+  });
+  test("many issues", () => {
+    const message = "emily's\nissues: [num](foo), bar";
+    const actual = extractIssuesFromString(message);
+    expect(actual).toBe("Issue(s): [num](foo), bar");
+  });
+});
+
+describe("changelog output", () => {
   test("prints out change log", () => {
     const message = "foobar";
     const logs = [{ message }];

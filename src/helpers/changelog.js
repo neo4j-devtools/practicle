@@ -3,7 +3,7 @@ export const extractChangeLogMessage = obj => {
     return l.name === "changelog";
   });
 
-  const changelogRegex = /(^|\n|\r)changelog\:(.*)/;
+  const changelogRegex = /(^|\n|\r)changelog\:(.*)/i;
 
   const getMessage = obj => {
     const regexMatch = obj.body && obj.body.match(changelogRegex);
@@ -18,16 +18,24 @@ export const extractChangeLogMessage = obj => {
   return label.length > 0 ? getMessage(obj) : null;
 };
 
+export const extractIssuesFromString = str => {
+  const issuesRegex = /(^|\n|\r)issues\:(.*)/i;
+  const regexMatch = str && str.match(issuesRegex);
+  return regexMatch && regexMatch.length >= 2 && regexMatch[2]
+    ? `Issue(s): ${regexMatch[2].trim()}`
+    : "";
+};
+
 export const buildOutput = (logs, header, repoInfo, outputPrLinks) => {
   let out = `\n## ${header}
     `;
 
   logs.forEach(_ => {
     out += outputPrLinks
-      ? `\n- ${_.message} [\#${_.number}](https://github.com/${
+      ? `\n- ${_.message} PR: [\#${_.number}](https://github.com/${
           repoInfo.owner
-        }/${repoInfo.repo}/pull/${_.number})`
-      : `\n- ${_.message}`;
+        }/${repoInfo.repo}/pull/${_.number}) ${_.issues}`.trim()
+      : `\n- ${_.message} ${_.issues}`.trim();
   });
   console.log(out);
 };
