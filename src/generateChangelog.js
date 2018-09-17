@@ -7,7 +7,7 @@ import { versionFilter } from "./helpers/utils";
 
 const octokit = new Octokit();
 
-async function fetchAllReleases(repoInfo) {
+async function fetchAllReleases(repoInfo, options = {}) {
   const perPage = 30;
 
   async function getReleases(page) {
@@ -28,7 +28,14 @@ async function fetchAllReleases(repoInfo) {
     stillGettingReleases = data.length === perPage;
     page += 1;
   }
-  return results.filter(_ => /^\d/.test(_.name));
+
+  if (options.filterString) {
+    return results.filter(_ =>
+      new RegExp(options.filterString, "i").test(_.name)
+    );
+  } else {
+    return results;
+  }
 }
 
 async function fetchCommitsBetween(from, to, repoInfo) {
@@ -85,18 +92,24 @@ async function main(args) {
   const repoInfo = extractFromGithubUrl(args.repo);
 
   const prs = await getAllPullRequests(repoInfo);
-  const releases = await fetchAllReleases(repoInfo);
+  const releases = await fetchAllReleases(repoInfo, {
+    filterString: args.releaseFilter
+  });
+
   const releaseTags = releases
     .map(release => release.name)
     .filter(name => versionFilter(name, args.prevVersion, args.nextVersion));
   releaseTags.push(args.nextVersion);
+
   const sortedList = semverSort.desc(releaseTags);
+
   for (const [index, value] of sortedList.entries()) {
     const nextRelease = sortedList[index + 1];
     const thisRelease = value === args.nextVersion ? args.lastCommit : value;
     if (!value || !nextRelease) {
       break;
     }
+
     const commits = await fetchCommitsBetween(
       nextRelease,
       thisRelease,
