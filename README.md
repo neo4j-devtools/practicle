@@ -48,7 +48,20 @@ Options:
 ```
 
 ## `draft-release`
-Takes contents from a file and creates a draft release on GitHub using that contents.
+Takes contents from a file and creates a _draft_ release on GitHub using that contents.
+
+```bash
+Options:
+  --token               GITHUB_TOKEN env should be set                [required]
+  --repo, -r            Github repo to push draft release to          [required]
+  --next-version, --nv  The next version of the software to be release[required]
+  --commit, -c          The commit that will be tagged                [required]
+  --file                File from which to read that will be used for the
+                        release description                           [required]
+
+```
+## `release`
+Takes contents from a file and creates a release on GitHub using that contents.
 
 ```bash
 Options:
