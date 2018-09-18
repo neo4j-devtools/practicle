@@ -49,6 +49,7 @@ Options:
                             change message
   --prev-version, --pv      The prev version tag you wish to begin the log
                             generation from
+  --release-filter, -rf     The regex that will be used to filter out releases
 ```
 
 ## `draft-release`
