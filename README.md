@@ -32,6 +32,10 @@ When `--prev-version` is included, the same thing happens but it starts from the
 
 By default, the text for the changelog entry is taken from the pull request title. If the pull request body includes `changelog:` on a separate line, it will override the default text.
 
+If `release-filter` is included, which should be a **regex** string, it will be used to filter out PRs by their names. Default value complies with semantic versioning that can optionally start with a *v*, like 1.0.1 or v1.0.1
+
+# Usage
+
 
 ```bash
 Options:
@@ -109,6 +113,18 @@ practicle generate-changelog \
   --token=xxx \
 > release_notes.md
 ```
+
+```bash
+# Only consider releases with name being in the format of `d.d.0`, so where patch is 0
+# Output to standard output
+practicle generate-changelog \
+--repo=https://github.com/neo4j/neo4j-browser \
+--next-version=3.2.5 \
+--last-commit=195694b5479ccc22d144d4ad5f81d74a1ceedb0e \
+--token=xxx
+--release-filter='^(?:\d*\.){2}0$'
+```
+
 
 ### Output
 
