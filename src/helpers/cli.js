@@ -71,7 +71,7 @@ const commandLineSetUp = y =>
 
 const commandLineSetUpPublish = y =>
   y
-    .env("GITHUB_TOKEN")
+    .env("GITHUB")
     .option("token", {
       describe: "GITHUB_TOKEN env should be set",
       demandOption: true
@@ -103,7 +103,7 @@ const commandLineSetUpPublish = y =>
 
 const commandLineSetUpFetch = y =>
   y
-    .env("GITHUB_TOKEN")
+    .env("GITHUB")
     .option("token", {
       describe: "GITHUB_TOKEN env should be set",
       demandOption: true
