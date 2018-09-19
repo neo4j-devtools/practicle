@@ -63,12 +63,12 @@ describe("extractIssuesFromMessage", () => {
     expect(actual).toBeFalsy();
   });
   test("single issue", () => {
-    const message = "elliot's\nissues: emily";
+    const message = "elliot's\nfixes: emily";
     const actual = extractIssuesFromString(message);
     expect(actual).toBe("Issue(s): emily");
   });
   test("many issues", () => {
-    const message = "emily's\nissues: [num](foo), bar";
+    const message = "emily's\nfixes: [num](foo), bar";
     const actual = extractIssuesFromString(message);
     expect(actual).toBe("Issue(s): [num](foo), bar");
   });

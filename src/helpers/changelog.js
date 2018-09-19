@@ -19,8 +19,8 @@ export const extractChangeLogMessage = obj => {
 };
 
 export const extractIssuesFromString = str => {
-  const issuesRegex = /(^|\n|\r)issues\:(.*)/i;
-  const regexMatch = str && str.match(issuesRegex);
+  const fixesRegex = /(^|\n|\r)fixes\:(.*)/i;
+  const regexMatch = str && str.match(fixesRegex);
   return regexMatch && regexMatch.length >= 2 && regexMatch[2]
     ? `Issue(s): ${regexMatch[2].trim()}`
     : "";
