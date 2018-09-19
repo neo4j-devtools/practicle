@@ -65,9 +65,9 @@ const commandLineSetUp = y =>
         describe:
           "The prev version tag you wish to begin the log generation from"
       },
-      "release-filter": {
-        alias: "rf",
-        describe: "The regex to filter out releases by their names "
+      "release-tag-filter": {
+        alias: "rtf",
+        describe: "The regex to filter out releases by their release tags"
       }
     })
     .help()

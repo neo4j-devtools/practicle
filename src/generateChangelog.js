@@ -7,7 +7,7 @@ import { versionFilter } from "./helpers/utils";
 
 const octokit = new Octokit();
 
-const defaultReleaseNameFormat = "v?(?:\\d*\\.?){3}$";
+const defaultReleaseTagFormat = "v?(?:\\d*\\.?){3}$";
 
 async function fetchAllReleases(repoInfo, options = {}) {
   const perPage = 30;
@@ -95,7 +95,7 @@ async function main(args) {
 
   const prs = await getAllPullRequests(repoInfo);
   const releases = await fetchAllReleases(repoInfo, {
-    filterString: args.releaseFilter || defaultReleaseNameFormat
+    filterString: args.releaseTagFilter || defaultReleaseTagFormat
   });
 
   const releaseTags = releases
