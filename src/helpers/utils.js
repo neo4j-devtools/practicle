@@ -1,3 +1,4 @@
+import semver from "semver";
 import semverCompare from "semver-compare";
 
 export const versionFilter = (name, prevVersion, nextVersion) => {
@@ -9,3 +10,5 @@ export const versionFilter = (name, prevVersion, nextVersion) => {
           [tokenizedNextVersion[0], tokenizedNextVersion[1]].join(".")
       );
 };
+
+export const isValidSemVer = str => semver.valid(str);

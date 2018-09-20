@@ -7,7 +7,7 @@ import {
   extractIssuesFromString
 } from "./helpers/changelog";
 import { extractFromGithubUrl } from "./helpers/github";
-import { versionFilter } from "./helpers/utils";
+import { versionFilter, isValidSemVer } from "./helpers/utils";
 
 const octokit = new Octokit();
 
@@ -103,15 +103,22 @@ async function main(args) {
   const releases = await fetchAllTags(repoInfo, {
     filterString: args.releaseTagFilter || defaultReleaseTagFormat
   });
-  const releaseTags = releases
-    .map(release => release.name)
-    .filter(name => versionFilter(name, args.prevVersion, args.nextVersion));
-  releaseTags.push(args.nextVersion);
+  let releaseTags = Array.from(new Set(releases.map(release => release.name)));
 
-  const sortedList = semverSort.desc(releaseTags);
+  if (isValidSemVer(args.prevVersion)) {
+    releaseTags = releaseTags.filter(name =>
+      versionFilter(name, args.prevVersion, args.nextVersion)
+    );
+    releaseTags = semverSort.desc(releaseTags);
+  } else {
+    releaseTags = releaseTags.filter(t => t && isValidSemVer(t));
+    releaseTags = semverSort.desc(releaseTags);
+    const nextTag = releaseTags.indexOf(args.nextVersion);
+    releaseTags = releaseTags.slice(nextTag, nextTag + args.prevVersion + 1);
+  }
 
-  for (const [index, value] of sortedList.entries()) {
-    const nextRelease = sortedList[index + 1];
+  for (const [index, value] of releaseTags.entries()) {
+    const nextRelease = releaseTags[index + 1];
     const thisRelease = value === args.nextVersion ? args.lastCommit : value;
     if (!value || !nextRelease) {
       break;
