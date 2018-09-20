@@ -68,6 +68,12 @@ const commandLineSetUp = y =>
       "release-tag-filter": {
         alias: "rtf",
         describe: "The regex to filter out releases by their release tags"
+      },
+      "label-filter": {
+        alias: "lf",
+        describe: "Override the pull requests label filter",
+        type: "array",
+        default: ["changelog"]
       }
     })
     .help()

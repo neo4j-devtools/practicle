@@ -36,7 +36,6 @@ If `release-tag-filter` is included, which should be a **regex** string, it will
 
 # Usage
 
-
 ```bash
 Options:
   --token                     GITHUB_TOKEN env should be set            [required]
@@ -50,6 +49,8 @@ Options:
   --prev-version, --pv        The prev version tag you wish to begin the log
                               generation from
   --release-tag-filter, --rtf The regex that will be used to filter out releases
+  --label-filter, --lf        Override the pull requests label filter
+                                                [array] [default: ["changelog"]]
 ```
 
 ## `draft-release`

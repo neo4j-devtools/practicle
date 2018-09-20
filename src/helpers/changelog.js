@@ -1,8 +1,5 @@
-export const extractChangeLogMessage = obj => {
-  const label = obj.labels.filter(l => {
-    return l.name === "changelog";
-  });
-
+export const extractChangeLogMessage = (obj, labelFilter) => {
+  const label = obj.labels.filter(l => labelFilter.includes(l.name));
   const changelogRegex = /(^|\n|\r)changelog\:(.*)/i;
 
   const getMessage = obj => {

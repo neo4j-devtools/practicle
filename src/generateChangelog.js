@@ -13,7 +13,7 @@ const octokit = new Octokit();
 
 const defaultReleaseTagFormat = "v?(?:\\d*\\.?){3}$";
 
-async function fetchAllTags(repoInfo) {
+async function fetchAllTags(repoInfo, options) {
   const perPage = 30;
 
   async function getReleases(page) {
@@ -55,7 +55,7 @@ async function fetchCommitsBetween(from, to, repoInfo) {
   return result.data.commits;
 }
 
-async function getAllPullRequests(repoInfo) {
+async function getAllPullRequests(repoInfo, labelFilter) {
   const perPage = 100;
 
   async function getPullRequests(page) {
@@ -80,7 +80,7 @@ async function getAllPullRequests(repoInfo) {
 
   return results
     .map(pr => {
-      const changelogMessage = extractChangeLogMessage(pr);
+      const changelogMessage = extractChangeLogMessage(pr, labelFilter);
       const issues = extractIssuesFromString(pr.body);
       const { url, merge_commit_sha, number } = pr;
       if (changelogMessage) {
@@ -98,7 +98,7 @@ async function getAllPullRequests(repoInfo) {
 
 async function main(args) {
   const repoInfo = extractFromGithubUrl(args.repo);
-  const prs = await getAllPullRequests(repoInfo);
+  const prs = await getAllPullRequests(repoInfo, args.labelFilter);
   const releases = await fetchAllTags(repoInfo, {
     filterString: args.releaseTagFilter || defaultReleaseTagFormat
   });
