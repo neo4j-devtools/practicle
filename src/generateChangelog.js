@@ -13,7 +13,7 @@ const octokit = new Octokit();
 
 const defaultReleaseTagFormat = "v?(?:\\d*\\.?){3}$";
 
-async function fetchAllReleases(repoInfo, options = {}) {
+async function fetchAllTags(repoInfo) {
   const perPage = 30;
 
   async function getReleases(page) {
@@ -98,12 +98,10 @@ async function getAllPullRequests(repoInfo) {
 
 async function main(args) {
   const repoInfo = extractFromGithubUrl(args.repo);
-
   const prs = await getAllPullRequests(repoInfo);
-  const releases = await fetchAllReleases(repoInfo, {
+  const releases = await fetchAllTags(repoInfo, {
     filterString: args.releaseTagFilter || defaultReleaseTagFormat
   });
-
   const releaseTags = releases
     .map(release => release.name)
     .filter(name => versionFilter(name, args.prevVersion, args.nextVersion));
