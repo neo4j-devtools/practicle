@@ -32,19 +32,24 @@ When `--prev-version` is included, the same thing happens but it starts from the
 
 By default, the text for the changelog entry is taken from the pull request title. If the pull request body includes `changelog:` on a separate line, it will override the default text.
 
+If `release-tag-filter` is included, which should be a **regex** string, it will be used to filter out releases by their tags. Default value complies with semantic versioning that can optionally start with a *v*, like 1.0.1 or v1.0.1
+
+# Usage
+
 
 ```bash
 Options:
-  --token                   GITHUB_TOKEN env should be set            [required]
-  --repo, -r                Github repo to pull changes from          [required]
-  --next-version, --nv      The next version of the software to be release
+  --token                     GITHUB_TOKEN env should be set            [required]
+  --repo, -r                  Github repo to pull changes from          [required]
+  --next-version, --nv        The next version of the software to be release
                                                                       [required]
-  --last-commit, --lc       The last commit hash to be considered for the
-                            changelog                                 [required]
-  --output-pr-links, --opl  Adds the corresponding Github link at the end of the
-                            change message
-  --prev-version, --pv      The prev version tag you wish to begin the log
-                            generation from
+  --last-commit, --lc         The last commit hash to be considered for the
+                              changelog                                 [required]
+  --output-pr-links, --opl    Adds the corresponding Github link at the end of the
+                              change message
+  --prev-version, --pv        The prev version tag you wish to begin the log
+                              generation from
+  --release-tag-filter, --rtf The regex that will be used to filter out releases
 ```
 
 ## `draft-release`
@@ -109,6 +114,18 @@ practicle generate-changelog \
   --token=xxx \
 > release_notes.md
 ```
+
+```bash
+# Only consider releases with name being in the format of `d.d.0`, so where patch is 0
+# Output to standard output
+practicle generate-changelog \
+--repo=https://github.com/neo4j/neo4j-browser \
+--next-version=3.2.5 \
+--last-commit=195694b5479ccc22d144d4ad5f81d74a1ceedb0e \
+--token=xxx
+--release-tag-filter='^(?:\d*\.){2}0$'
+```
+
 
 ### Output
 
