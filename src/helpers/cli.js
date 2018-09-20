@@ -62,8 +62,10 @@ const commandLineSetUp = y =>
       },
       "prev-version": {
         alias: "pv",
-        describe:
-          "The prev version tag you wish to begin the log generation from"
+        describe: `The prev version to generate the changelog from.
+            - If arg is a valid Semver string (x.x.x) then the changelog will generate notes from the tag
+            - If arg is a number that will fetch n number of releases back. E.g. Given [1...9] && --next-version=10 && --prev-version=2 => 8...10
+          `
       },
       "release-tag-filter": {
         alias: "rtf",
