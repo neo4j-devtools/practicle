@@ -104,17 +104,17 @@ async function main(args) {
     filterString: args.releaseTagFilter || defaultReleaseTagFormat
   });
   let releaseTags = Array.from(new Set(releases.map(release => release.name)));
-
   if (isValidSemVer(args.prevVersion)) {
     releaseTags = releaseTags.filter(name =>
       versionFilter(name, args.prevVersion, args.nextVersion)
     );
     releaseTags = semverSort.desc(releaseTags);
-  } else {
+  }
+  if (args.prevVersion === true) {
     releaseTags = releaseTags.filter(t => t && isValidSemVer(t));
     releaseTags = semverSort.desc(releaseTags);
     const nextTag = releaseTags.indexOf(args.nextVersion);
-    releaseTags = releaseTags.slice(nextTag, nextTag + args.prevVersion + 1);
+    releaseTags = releaseTags.slice(nextTag, nextTag + 2);
   }
 
   for (const [index, value] of releaseTags.entries()) {
