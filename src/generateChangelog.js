@@ -11,7 +11,8 @@ import { versionFilter } from "./helpers/utils";
 
 const octokit = new Octokit();
 
-const defaultReleaseTagFormat = "v?(?:\\d*\\.?){3}$";
+export const defaultReleaseTagFormat = "^v?\\d+\\.\\d+\\.\\d+$";
+export const isValidReleaseTag = (re, tag) => new RegExp(re, "i").test(tag);
 
 async function fetchAllTags(repoInfo) {
   const perPage = 30;
@@ -36,8 +37,8 @@ async function fetchAllTags(repoInfo) {
   }
 
   if (options.filterString) {
-    return results.filter(_ =>
-      new RegExp(options.filterString, "i").test(_.name)
+    return results.filter(res =>
+      isValidReleaseTag(options.filterString, res.name)
     );
   } else {
     return results;
