@@ -1,4 +1,4 @@
-import { versionFilter } from "./utils.js";
+import { versionFilter, isValidSemVer } from "./utils.js";
 
 test("versionFilter filters correctly", () => {
   const tests = [
@@ -40,4 +40,16 @@ test("versionFilter filters correctly", () => {
       versionFilter(test.tagName, test.prevVersion, test.nextVersion)
     ).toBe(test.expect)
   );
+});
+
+describe("isValidSemVer", () => {
+  test("should be invalid", () => {
+    expect(isValidSemVer("a.b.c")).toBeFalsy();
+    expect(isValidSemVer("1")).toBeFalsy();
+    expect(isValidSemVer("1.1")).toBeFalsy();
+  });
+  test("should be valid", () => {
+    expect(isValidSemVer("1.1.1")).toBeTruthy();
+    expect(isValidSemVer("v1.1.1")).toBeTruthy();
+  });
 });

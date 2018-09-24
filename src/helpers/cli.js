@@ -4,6 +4,8 @@ import { init as draftReleaseToGithub } from "../draftReleaseToGithub";
 import { init as releaseToGithub } from "../releaseToGithub";
 import { init as relaseNotesFromGithub } from "../relaseNotesFromGithub";
 
+import { isValidSemVer } from "./utils";
+
 export const setUpCli = () =>
   yargs
     .command(
@@ -62,8 +64,11 @@ const commandLineSetUp = y =>
       },
       "prev-version": {
         alias: "pv",
-        describe:
-          "The prev version tag you wish to begin the log generation from"
+        describe: `The prev version to generate the changelog from.
+            - If arg is a valid Semver string (x.x.x) then the changelog will generate notes from the tag
+            - If used as a flag then the changelog is generated from the previous semver tag.
+            - If ommitted then the semver major.minor version is used to generate changelogs over that range
+          `
       },
       "release-tag-filter": {
         alias: "rtf",
@@ -74,6 +79,19 @@ const commandLineSetUp = y =>
         describe: "Override the pull requests label filter",
         type: "array",
         default: ["changelog"]
+      }
+    })
+    .check(argv => {
+      if (
+        !(
+          argv.prevVersion === undefined ||
+          argv.prevVersion === true ||
+          isValidSemVer(argv.prevVersion)
+        )
+      ) {
+        throw new Error("--prevVersion is invalid");
+      } else {
+        return true;
       }
     })
     .help()

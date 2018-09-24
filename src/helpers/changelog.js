@@ -23,16 +23,18 @@ export const extractIssuesFromString = str => {
     : "";
 };
 
+const newLine = "\n";
 export const buildOutput = (logs, header, repoInfo, outputPrLinks) => {
-  let out = `\n## ${header}
-    `;
+  let out = `\n## ${header}\n`;
 
   logs.forEach(_ => {
     out += outputPrLinks
-      ? `\n- ${_.message} PR: [\#${_.number}](https://github.com/${
+      ? newLine +
+        `- ${_.message} PR: [\#${_.number}](https://github.com/${
           repoInfo.owner
-        }/${repoInfo.repo}/pull/${_.number}) ${_.issues}`.trim()
-      : `\n- ${_.message} ${_.issues}`.trim();
+        }/${repoInfo.repo}/pull/${_.number}) ${_.issues}`.trim() +
+        newLine
+      : newLine + `- ${_.message} ${_.issues}`.trim() + newLine;
   });
   console.log(out);
 };
