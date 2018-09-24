@@ -123,7 +123,7 @@ async function main(args) {
 
   for (const [index, value] of releaseTags.entries()) {
     const nextRelease = releaseTags[index + 1];
-    const thisRelease = value === args.nextVersion ? args.lastCommit : value;
+    const thisRelease = value === args.nextVersion ? args.releaseCommit : value;
     if (!value || !nextRelease) {
       break;
     }

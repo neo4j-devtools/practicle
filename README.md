@@ -4,8 +4,6 @@
 
 # PRacticle - the pr-activated-changelog-emitter
 
-
-
 # Installation
 
 Install globally to get a binary executable in your system.
@@ -32,28 +30,40 @@ When `--prev-version` is included, the same thing happens but it starts from the
 
 By default, the text for the changelog entry is taken from the pull request title. If the pull request body includes `changelog:` on a separate line, it will override the default text.
 
-If `release-tag-filter` is included, which should be a **regex** string, it will be used to filter out releases by their tags. Default value complies with semantic versioning that can optionally start with a *v*, like 1.0.1 or v1.0.1
+If `release-tag-filter` is included, which should be a **regex** string, it will be used to filter out releases by their tags. Default value complies with semantic versioning that can optionally start with a _v_, like 1.0.1 or v1.0.1
 
 # Usage
 
 ```bash
 Options:
-  --token                     GITHUB_TOKEN env should be set            [required]
-  --repo, -r                  Github repo to pull changes from          [required]
-  --next-version, --nv        The next version of the software to be release
+  --token                      GITHUB_TOKEN env should be set         [required]
+  --repo, -r                   Github repo to pull changes from       [required]
+  --next-version, --nv         The next version of the software to be release
                                                                       [required]
-  --last-commit, --lc         The last commit hash to be considered for the
-                              changelog                                 [required]
-  --output-pr-links, --opl    Adds the corresponding Github link at the end of the
-                              change message
-  --prev-version, --pv        The prev version tag you wish to begin the log
-                              generation from
-  --release-tag-filter, --rtf The regex that will be used to filter out releases
-  --label-filter, --lf        Override the pull requests label filter
+  --release-commit, --rc       The commit hash to be considered as the release
+                               for the changelog                      [required]
+  --output-pr-links, --opl     Adds the corresponding Github link at the end of
+                               the change message
+  --prev-version, --pv         The prev version to generate the
+                               changelog from.
+                               - If arg is a valid Semver string
+                               (x.x.x) then the changelog will
+                               generate notes from the tag
+                               - If used as a flag then the changelog
+                               is generated from the previous semver
+                               tag.
+                               - If ommitted then the semver
+                               major.minor version is used to
+                               generate changelogs over that range
+
+  --release-tag-filter, --rtf  The regex to filter out releases by their release
+                               tags               [default: "^v?\d+\.\d+\.\d+$"]
+  --label-filter, --lf         Override the pull requests label filter
                                                 [array] [default: ["changelog"]]
 ```
 
 ## `draft-release`
+
 Takes contents from a file and creates a _draft_ release on GitHub using that contents.
 
 ```bash
@@ -64,9 +74,10 @@ Options:
   --commit, -c          The commit that will be tagged                [required]
   --file                File from which to read that will be used for the
                         release description                           [required]
-
 ```
+
 ## `release`
+
 Takes contents from a file and creates a release on GitHub using that contents.
 
 ```bash
@@ -77,11 +88,12 @@ Options:
   --commit, -c          The commit that will be tagged                [required]
   --file                File from which to read that will be used for the
                         release description                           [required]
-
 ```
 
 ## `fetch-release-notes`
+
 Fetches release notes from a release tag (or draft release tag) from Github and outputs it to standard out.
+
 ```
 Options:
   --token     GITHUB_TOKEN env should be set                          [required]
@@ -99,7 +111,7 @@ Options:
 practicle generate-changelog \
   --repo=https://github.com/neo4j/neo4j-browser \
   --next-version=3.2.5 \
-  --last-commit=195694b5479ccc22d144d4ad5f81d74a1ceedb0e \
+  --release-commit=195694b5479ccc22d144d4ad5f81d74a1ceedb0e \
   --output-pr-links \
   --token=xxx
 ```
@@ -110,7 +122,7 @@ practicle generate-changelog \
   --repo=https://github.com/neo4j/neo4j-browser \
   --next-version=3.2.5 \
   --prev-version=3.2.4 \
-  --last-commit=195694b5479ccc22d144d4ad5f81d74a1ceedb0e \
+  --release-commit=195694b5479ccc22d144d4ad5f81d74a1ceedb0e \
   --output-pr-links \
   --token=xxx \
 > release_notes.md
@@ -122,11 +134,10 @@ practicle generate-changelog \
 practicle generate-changelog \
 --repo=https://github.com/neo4j/neo4j-browser \
 --next-version=3.2.5 \
---last-commit=195694b5479ccc22d144d4ad5f81d74a1ceedb0e \
+--release-commit=195694b5479ccc22d144d4ad5f81d74a1ceedb0e \
 --token=xxx
 --release-tag-filter='^(?:\d*\.){2}0$'
 ```
-
 
 ### Output
 
@@ -136,7 +147,7 @@ The following command (try it, just remember to use your [own token](https://git
 practicle generate-changelog \
   --repo=https://github.com/neo4j/neo4j-browser \
   --next-version=3.2.6 \
-  --last-commit=7ee472bedcc2e73023e9cf09708e597913ff70cd \
+  --release-commit=7ee472bedcc2e73023e9cf09708e597913ff70cd \
   --output-pr-links \
   --token=xxx
 ```

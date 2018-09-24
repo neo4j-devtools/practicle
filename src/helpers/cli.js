@@ -52,9 +52,10 @@ const commandLineSetUp = y =>
         describe: "The next version of the software to be release",
         demandOption: true
       },
-      "last-commit": {
-        alias: "lc",
-        describe: "The last commit hash to be considered for the changelog",
+      "release-commit": {
+        alias: "rc",
+        describe:
+          "The commit hash to be considered as the release for the changelog",
         demandOption: true
       },
       "output-pr-links": {
@@ -72,7 +73,8 @@ const commandLineSetUp = y =>
       },
       "release-tag-filter": {
         alias: "rtf",
-        describe: "The regex to filter out releases by their release tags"
+        describe: "The regex to filter out releases by their release tags",
+        default: "^v?\\d+\\.\\d+\\.\\d+$"
       },
       "label-filter": {
         alias: "lf",
