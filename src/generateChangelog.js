@@ -103,7 +103,11 @@ async function main(args) {
   const releases = await fetchAllTags(repoInfo, {
     filterString: args.releaseTagFilter || defaultReleaseTagFormat
   });
-  let releaseTags = Array.from(new Set(releases.map(release => release.name)));
+
+  let releaseTags = [args.nextVersion].concat(
+    Array.from(new Set(releases.map(release => release.name)))
+  );
+
   if (isValidSemVer(args.prevVersion)) {
     releaseTags = releaseTags.filter(name =>
       versionFilter(name, args.prevVersion, args.nextVersion)
