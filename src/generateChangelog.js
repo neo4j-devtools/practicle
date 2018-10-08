@@ -99,10 +99,17 @@ async function getAllPullRequests(repoInfo, labelFilter) {
 
 async function main(args) {
   const repoInfo = extractFromGithubUrl(args.repo);
-  const prs = await getAllPullRequests(repoInfo, args.labelFilter);
-  const releases = await fetchAllTags(repoInfo, {
-    filterString: args.releaseTagFilter || defaultReleaseTagFormat
-  });
+  let prs;
+  let releases;
+  try {
+    prs = await getAllPullRequests(repoInfo, args.labelFilter);
+    releases = await fetchAllTags(repoInfo, {
+      filterString: args.releaseTagFilter || defaultReleaseTagFormat
+    });
+  } catch (e) {
+    console.error("Something went wrong: " + e.message);
+    process.exit(1);
+  }
 
   let releaseTags = [args.nextVersion].concat(
     Array.from(new Set(releases.map(release => release.name)))

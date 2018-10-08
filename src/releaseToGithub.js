@@ -24,10 +24,12 @@ async function publishRelease(args, content, repoInfo) {
       console.log(result.data.html_url.split("/").reverse()[0]);
     } else {
       console.log("Draft release failed", result.status);
+      process.exit(1);
     }
     return result;
   } catch (e) {
     console.error(`Cannot create github release: ${e}`);
+    process.exit(1);
   }
 }
 
