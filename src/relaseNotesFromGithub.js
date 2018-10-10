@@ -42,6 +42,7 @@ async function main(args) {
       "An error occurred. Make sure you specify a Github release tag (a tag that is marked as a release in Github)",
       e.message
     );
+    process.exit(1);
   }
 }
 
