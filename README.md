@@ -2,7 +2,7 @@
   <img src="https://i.imgur.com/KvrVHgB.png" width="340" alt="practicle logo">
 </p>
 
-# PRacticle - the pr-activated-changelog-emitter
+# PRacticle - the pr-activated-changelog-emitter test
 
 # Installation
 
