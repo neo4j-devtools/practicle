@@ -150,11 +150,24 @@ async function main(args) {
     };
     const commitsToPrs = commits
       .map(commit => {
-        return prs.find(pr => matchPR(pr, commit));
+        const pr = prs.find(pr => matchPR(pr, commit));
+        return pr
+          ? {
+              ...pr,
+              author:
+                commit && commit.author ? commit.author.login : "No Author"
+            }
+          : undefined;
       })
       .filter(_ => _);
     if (commitsToPrs.length !== 0) {
-      buildOutput(commitsToPrs, value, repoInfo, args.outputPrLinks);
+      buildOutput(
+        commitsToPrs,
+        value,
+        repoInfo,
+        args.outputPrLinks,
+        args.outputAuthor
+      );
     }
   }
 }

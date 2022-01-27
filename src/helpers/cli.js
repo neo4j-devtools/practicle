@@ -63,6 +63,10 @@ const commandLineSetUp = y =>
         describe:
           "Adds the corresponding Github link at the end of the change message"
       },
+      "output-author": {
+        alias: "oa",
+        describe: "Adds the author of the PR to the changelog message"
+      },
       "prev-version": {
         alias: "pv",
         describe: `The prev version to generate the changelog from.
