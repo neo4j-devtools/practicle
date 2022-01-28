@@ -44,6 +44,7 @@ Options:
                                for the changelog                      [required]
   --output-pr-links, --opl     Adds the corresponding Github link at the end of
                                the change message
+  --output-author, --oa        Appends the PR author to the change message
   --prev-version, --pv         The prev version to generate the
                                changelog from.
                                - If arg is a valid Semver string
