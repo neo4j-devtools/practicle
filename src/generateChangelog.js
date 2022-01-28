@@ -111,9 +111,9 @@ async function main(args) {
     process.exit(1);
   }
 
-  let releaseTags = [args.nextVersion].concat(
-    Array.from(new Set(releases.map(release => release.name)))
-  );
+  const releaseSet = new Set(releases.map(release => release.name));
+  releaseSet.add(args.nextVersion);
+  let releaseTags = Array.from(releaseSet);
 
   if (isValidSemVer(args.prevVersion)) {
     releaseTags = releaseTags.filter(name =>
@@ -140,13 +140,34 @@ async function main(args) {
       thisRelease,
       repoInfo
     );
+    const matchPR = (pr, commit) => {
+      if (pr.sha === commit.sha) return true;
+      const nrMatch = commit.commit.message.match(/.*\(\#(.*)\)/);
+      if (nrMatch && nrMatch[1]) {
+        return parseInt(nrMatch[1]) === pr.number;
+      }
+      return false;
+    };
     const commitsToPrs = commits
       .map(commit => {
-        return prs.find(pr => pr.sha === commit.sha);
+        const pr = prs.find(pr => matchPR(pr, commit));
+        return pr
+          ? {
+              ...pr,
+              author:
+                commit && commit.author ? commit.author.login : "No Author"
+            }
+          : undefined;
       })
       .filter(_ => _);
     if (commitsToPrs.length !== 0) {
-      buildOutput(commitsToPrs, value, repoInfo, args.outputPrLinks);
+      buildOutput(
+        commitsToPrs,
+        value,
+        repoInfo,
+        args.outputPrLinks,
+        args.outputAuthor
+      );
     }
   }
 }
