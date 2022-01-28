@@ -22,7 +22,7 @@ The pull requests need to have a `changelog` label applied to them.
 If the option `--prev-version` is omitted PRacticle finds all PR:s in
 the semver minor version and generates a complete changelog for all versions in that range.
 
-I.e. if `--next-version=3.2.5` is used, the output will include all changes from `3.2.0` to the upoming `3.2.5` release. They are grouped by version.
+I.e. if `--next-version=3.2.5` is used, the output will include all changes from `3.2.0` to the upcoming `3.2.5` release. They are grouped by version.
 
 Versions are generated from git tags that has the format `x.y.z`.
 
@@ -53,7 +53,7 @@ Options:
                                - If used as a flag then the changelog
                                is generated from the previous semver
                                tag.
-                               - If ommitted then the semver
+                               - If omitted then the semver
                                major.minor version is used to
                                generate changelogs over that range
 

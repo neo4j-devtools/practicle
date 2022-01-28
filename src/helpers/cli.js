@@ -2,7 +2,7 @@ import yargs from "yargs";
 import { init as generateChangelog } from "./../generateChangelog";
 import { init as draftReleaseToGithub } from "../draftReleaseToGithub";
 import { init as releaseToGithub } from "../releaseToGithub";
-import { init as relaseNotesFromGithub } from "../relaseNotesFromGithub";
+import { init as releaseNotesFromGithub } from "../releaseNotesFromGithub";
 
 import { isValidSemVer } from "./utils";
 
@@ -30,7 +30,7 @@ export const setUpCli = () =>
       "fetch-release-notes",
       "Fetch release notes from Github",
       commandLineSetUpFetch,
-      relaseNotesFromGithub
+      releaseNotesFromGithub
     )
     .demandCommand().argv;
 
@@ -72,7 +72,7 @@ const commandLineSetUp = y =>
         describe: `The prev version to generate the changelog from.
             - If arg is a valid Semver string (x.x.x) then the changelog will generate notes from the tag
             - If used as a flag then the changelog is generated from the previous semver tag.
-            - If ommitted then the semver major.minor version is used to generate changelogs over that range
+            - If omitted then the semver major.minor version is used to generate changelogs over that range
           `
       },
       "release-tag-filter": {
