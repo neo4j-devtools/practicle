@@ -32,6 +32,12 @@ test("versionFilter filters correctly", () => {
       prevVersion: "2.1.1",
       nextVersion: "2.1.5",
       expect: false
+    },
+    {
+      tagName: "2.1.0",
+      prevVersion: "1.9.1",
+      nextVersion: "2.0.0",
+      expect: false
     }
   ];
 
