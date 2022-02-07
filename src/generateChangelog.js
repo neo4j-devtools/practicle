@@ -18,7 +18,7 @@ async function fetchAllTags(repoInfo, options) {
   const perPage = 30;
 
   async function getReleases(page) {
-    const result = await octokit.repos.getTags({
+    const result = await octokit.repos.listTags({
       owner: repoInfo.owner,
       repo: repoInfo.repo,
       per_page: perPage,
@@ -60,7 +60,7 @@ async function getAllPullRequests(repoInfo, labelFilter) {
   const perPage = 100;
 
   async function getPullRequests(page) {
-    const result = await octokit.pullRequests.getAll({
+    const result = await octokit.pullRequests.list({
       owner: repoInfo.owner,
       repo: repoInfo.repo,
       state: "closed",
